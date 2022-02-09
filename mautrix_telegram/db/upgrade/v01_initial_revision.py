@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from __future__ import annotations
 
-from mautrix.util.async_db import Connection
+from mautrix.util.async_db import Connection, Scheme
 
 from . import upgrade_table
 from .v00_latest_revision import create_v6_tables
@@ -25,9 +25,9 @@ last_legacy_version = "bfc0a39bfe02"
 
 
 def table_exists(scheme: str, name: str) -> str:
-    if scheme == "sqlite":
+    if scheme == Scheme.SQLITE:
         return f"SELECT EXISTS(SELECT 1 FROM sqlite_master WHERE type='table' AND name='{name}')"
-    elif scheme in ("postgres", "cockroach"):
+    elif scheme in (Scheme.POSTGRES, Scheme.COCKROACH):
         return f"SELECT EXISTS(SELECT FROM information_schema.tables WHERE table_name='{name}')"
     raise RuntimeError("unsupported database scheme")
 
