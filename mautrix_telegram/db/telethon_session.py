@@ -153,7 +153,7 @@ class PgSession(MemorySession):
         ] = self._entities_to_rows(tlo)
         if not rows:
             return
-        if self.db.scheme in (Scheme.POSTGRES, Scheme.COCKROACH):
+        if self.db.scheme == Scheme.POSTGRES:
             q = (
                 "INSERT INTO telethon_entities (session_id, id, hash, username, phone, name) "
                 "VALUES ($1, unnest($2::bigint[]), unnest($3::bigint[]), "
