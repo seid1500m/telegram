@@ -99,6 +99,7 @@ async def create_v6_tables(conn: Connection) -> int:
             disable_updates     BOOLEAN NOT NULL DEFAULT false,
             username            TEXT,
             photo_id            TEXT,
+            avatar_url          TEXT,
             name_set            BOOLEAN NOT NULL DEFAULT false,
             avatar_set          BOOLEAN NOT NULL DEFAULT false,
             is_bot              BOOLEAN,
